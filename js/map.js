@@ -5,6 +5,17 @@
   var mainPin = window.utils.mainPin;
   var data = [];
 
+  var PIN_LIMITS = {
+    x: {
+      left: mainPin.offsetWidth,
+      right: mainPin.offsetWidth
+    },
+    y: {
+      top: 100 + mainPin.offsetHeight,
+      bottom: pinContainer.offsetHeight - mainPin.offsetHeight * 2 - 500
+    }
+  };
+
   var successHandler = function (array) {
     data = array;
     window.map = {
@@ -64,50 +75,7 @@
     }
   };
 
-  mainPin.addEventListener('mousedown', function (evt) {
-    evt.preventDefault();
-
-    var startCoords = {
-      x: evt.clientX,
-      y: evt.clientY
-    };
-
-    var onMouseMove = function (moveEvt) {
-      moveEvt.preventDefault();
-
-      var shift = {
-        x: startCoords.x - moveEvt.clientX,
-        y: startCoords.y - moveEvt.clientY
-      };
-
-      startCoords = {
-        x: moveEvt.clientX,
-        y: moveEvt.clientY
-      };
-
-      var coordX = mainPin.offsetLeft - shift.x;
-      var coordY = mainPin.offsetTop - shift.y;
-
-      if (coordY > 100 + window.utils.MAIN_PIN_HEIGHT && coordY < 500 + window.utils.MAIN_PIN_HEIGHT) {
-        mainPin.style.top = coordY + 'px';
-      }
-      if (coordX > 48 + (window.utils.MAIN_PIN_WIDTH / 2) && coordX < 1090 + (window.utils.MAIN_PIN_WIDTH / 2)) {
-        mainPin.style.left = coordX + 'px';
-      }
-
-      window.form.setPinLocation();
-    };
-
-    var onMouseUp = function (upEvt) {
-      upEvt.preventDefault();
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
-    };
-
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
-  });
-
+  window.utils.enableDragging(mainPin, mainPin, PIN_LIMITS, window.form.setPinLocation);
   window.backend.load(successHandler, window.backend.errorHandler);
   mainPin.addEventListener('mouseup', mainPinClickHandler);
   mainPin.addEventListener('keydown', mainPinClickHandler);

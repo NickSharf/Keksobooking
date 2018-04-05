@@ -23,6 +23,73 @@
 
     getRandomNumber: function (min, max) {
       return Math.floor(Math.random() * (max - min) + min);
-    }
+    },
+
+    enableDragging: function (handlerElem, dragElem, extraLimits, callback) {
+      dragElem = dragElem || handlerElem;
+
+      var noLimits = {
+        x: {
+          left: 0,
+          right: 0
+        },
+        y: {
+          top: 0,
+          bottom: 0
+        }
+      };
+      var limits = Object.assign(noLimits, extraLimits);
+
+      handlerElem.addEventListener('mousedown', function (event) {
+        event.preventDefault();
+
+        var clickInsideElemOffset = {
+          x: event.clientX - dragElem.offsetLeft,
+          y: event.clientY - dragElem.offsetTop
+        };
+
+        var dragElemHalfWidth = dragElem.offsetWidth / 2;
+        var dragElemHalfHeight = dragElem.offsetHeight / 2;
+
+        var minCoords = {
+          x: dragElemHalfWidth + limits.x.left,
+          y: dragElemHalfHeight + limits.y.top
+        };
+
+        var maxCoords = {
+          x: dragElem.parentNode.offsetWidth - dragElemHalfWidth - limits.x.right,
+          y: dragElem.parentNode.offsetHeight - dragElemHalfHeight - limits.y.bottom
+        };
+
+        var onElemHandlerMouseMove = function (moveEvent) {
+
+          var moveCoords = {
+            x: moveEvent.clientX - clickInsideElemOffset.x,
+            y: moveEvent.clientY - clickInsideElemOffset.y
+          };
+
+          var movedElemNewPosition = {
+            x: Math.max(minCoords.x, Math.min(moveCoords.x, maxCoords.x)),
+            y: Math.max(minCoords.y, Math.min(moveCoords.y, maxCoords.y))
+          };
+
+          dragElem.style.left = movedElemNewPosition.x + 'px';
+          dragElem.style.top = movedElemNewPosition.y + 'px';
+
+          if (typeof callback === 'function') {
+            callback();
+          }
+        };
+
+        var onMouseUp = function (upEvt) {
+          upEvt.preventDefault();
+          document.removeEventListener('mousemove', onElemHandlerMouseMove);
+          document.removeEventListener('mouseup', onMouseUp);
+        };
+
+        document.addEventListener('mousemove', onElemHandlerMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+      });
+    },
   };
 })();

@@ -94,16 +94,12 @@
   };
 
   var formSucessHandler = function () {
-    var cover = document.createElement('div');
     var node = document.createElement('div');
-    cover.classList.add('cover');
     node.classList.add('success-message');
     node.textContent = 'Данные отправлены успешно';
-    document.body.insertAdjacentElement('afterbegin', cover);
     document.body.insertAdjacentElement('afterbegin', node);
     setTimeout(function () {
       document.body.removeChild(node);
-      document.body.removeChild(cover);
     }, 3000);
   };
 

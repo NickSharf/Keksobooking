@@ -41,19 +41,12 @@
     },
     errorHandler: function (errorMessage) {
       var node = document.createElement('div');
-      var cover = document.createElement('div');
-      cover.classList.add('cover');
       node.classList.add('error-message');
       node.textContent = errorMessage;
       if (!errorMessage) {
         node.textContent = 'Произошла ошибка';
       }
-      document.body.insertAdjacentElement('afterbegin', cover);
       document.body.insertAdjacentElement('afterbegin', node);
-      setTimeout(function () {
-        document.body.removeChild(node);
-        document.body.removeChild(cover);
-      }, 3000);
     }
   };
 })();
