@@ -255,8 +255,8 @@ textarea:focus
 .map__pin::after
 {
     position: absolute;
-    top: 100%;
-    left: 50%;
+    top: 99%;
+    left: 40%;
 
     width: 0;
     height: 0;
