@@ -234,7 +234,7 @@ textarea:focus
     z-index: 1;
 
     width: 46px;
-    height: 46px;
+    height: 44px;
     margin: 0;
     padding: 0;
 
@@ -255,8 +255,10 @@ textarea:focus
 .map__pin::after
 {
     position: absolute;
-    top: 99%;
-    left: 40%;
+    top: 100%;
+    left: 50%;
+
+    transform: translateX(-50%);
 
     width: 0;
     height: 0;
