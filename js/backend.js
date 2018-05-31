@@ -47,11 +47,6 @@
         node.textContent = 'Произошла ошибка';
       }
       document.body.insertAdjacentElement('afterbegin', node);
-    },
-    successHandler: function (data) {
-      window.backend = {
-        data: data
-      };
     }
   };
 })();

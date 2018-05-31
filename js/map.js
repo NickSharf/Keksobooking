@@ -15,6 +15,12 @@
     }
   };
 
+  var successHandler = function (data) {
+    window.map = {
+      data: data
+    };
+  };
+
   var mainPinClickHandler = function (evt) {
     window.form.setPinLocation();
     if (mainPin === document.activeElement && evt.keyCode === window.utils.ENTER_KEYCODE || evt.type === 'mouseup') {
@@ -67,7 +73,7 @@
   };
 
   window.utils.enableDragging(mainPin, mainPin, PIN_LIMITS, window.form.setPinLocation);
-  window.backend.load(window.backend.successHandler, window.backend.errorHandler);
+  window.backend.load(successHandler, window.backend.errorHandler);
   mainPin.addEventListener('mouseup', mainPinClickHandler);
   mainPin.addEventListener('keydown', mainPinClickHandler);
   pinContainer.addEventListener('click', pinContainerClickHandler);
