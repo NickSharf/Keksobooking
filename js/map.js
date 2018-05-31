@@ -3,7 +3,6 @@
 (function () {
   var pinContainer = window.utils.pinContainer;
   var mainPin = window.utils.mainPin;
-  var data = [];
 
   var PIN_LIMITS = {
     x: {
@@ -14,14 +13,6 @@
       top: 100 + mainPin.offsetHeight,
       bottom: pinContainer.offsetHeight - mainPin.offsetHeight * 2 - 500
     }
-  };
-
-  var successHandler = function (array) {
-    data = array;
-    window.map = {
-      data: data
-    };
-
   };
 
   var mainPinClickHandler = function (evt) {
@@ -76,7 +67,7 @@
   };
 
   window.utils.enableDragging(mainPin, mainPin, PIN_LIMITS, window.form.setPinLocation);
-  window.backend.load(successHandler, window.backend.errorHandler);
+  window.backend.load(window.backend.successHandler, window.backend.errorHandler);
   mainPin.addEventListener('mouseup', mainPinClickHandler);
   mainPin.addEventListener('keydown', mainPinClickHandler);
   pinContainer.addEventListener('click', pinContainerClickHandler);

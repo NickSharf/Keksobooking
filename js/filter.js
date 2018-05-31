@@ -68,7 +68,7 @@
   };
 
   var updateOffers = function () {
-    var filteredAds = window.map.data.filter(filterAds);
+    var filteredAds = window.backend.data.filter(filterAds);
     window.pin.removePins();
     window.showcard.removeCards();
     window.pin.renderPins(filteredAds, window.utils.pinContainer);
