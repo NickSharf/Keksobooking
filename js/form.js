@@ -51,27 +51,20 @@
   };
 
   var roomNumberSelectHandler = function () {
-    var ROOM_CAPACITY = {
-      '1': ['1'],
-      '2': ['1', '2'],
-      '3': ['1', '2', '3'],
-      '100': ['0']
+    var RoomCapacity = {
+      1: [1],
+      2: [1, 2],
+      3: [1, 2, 3],
+      100: [0]
     };
-
-    var roomCount = roomNumber.value;
-    var options = capacity.options;
-    var hasSelected = false;
-
-    for (var i = 0; i < options.length; i++) {
-      var suitableCapacity = ROOM_CAPACITY[roomCount];
-      var isDisabled = suitableCapacity.indexOf(options[i].value) === -1;
-      options[i].selected = false;
-      options[i].disabled = isDisabled;
-      if (!isDisabled && !hasSelected) {
-        options[i].selected = true;
-        hasSelected = true;
-      }
-    }
+    var capacityOptions = capacity.querySelectorAll('option');
+    capacityOptions.forEach(function (it) {
+      it.disabled = true;
+    });
+    RoomCapacity[roomNumber.value].forEach(function (it) {
+      capacity.querySelector('option' + '[value="' + it + '"]').disabled = false;
+      capacity.value = it;
+    });
   };
 
   var checkErorrs = function () {
