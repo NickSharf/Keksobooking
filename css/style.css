@@ -492,7 +492,7 @@ textarea:focus
   border: 1px solid black;
 }
 
-.popup__pictures img:nth-of-type(4)
+.popup__pictures img:nth-of-type(4n)
 {
   margin-right: 0;
 }
