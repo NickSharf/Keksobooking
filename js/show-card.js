@@ -15,6 +15,16 @@
     return fragment;
   };
 
+  var renderPhotos = function (array) {
+    var fragment = document.createDocumentFragment();
+    array.forEach(function (elem) {
+      var image = document.createElement('img');
+      image.src = elem;
+      fragment.appendChild(image);
+    });
+    return fragment;
+  };
+
   var createOffers = function (array) {
     var mapFiltersContainer = document.querySelector('.map__filters-container');
     var cardTemplate = template.querySelector('.map__card');
@@ -32,6 +42,7 @@
       var adFeatures = cardTemplateItem.querySelector('.popup__features');
       var adDescription = cardTemplateItem.querySelector('p:nth-of-type(5)');
       var adAvatar = cardTemplateItem.querySelector('.popup__avatar');
+      var adImages = cardTemplateItem.querySelector('.popup__pictures');
 
       adTitle.textContent = array[i].offer.title;
       adAdress.textContent = array[i].offer.adress;
@@ -49,6 +60,8 @@
       adCheck.textContent = 'Заезд после ' + array[i].offer.checkin + ', выезд до ' + array[i].offer.checkout;
       adFeatures.innerHTML = '';
       adFeatures.appendChild(renderFeatures(array[i].offer.features));
+      adImages.innerHTML = '';
+      adImages.appendChild(renderPhotos(array[i].offer.photos));
       adDescription.textContent = array[i].offer.description;
       adAvatar.setAttribute('src', array[i].author.avatar);
       cardTemplateItem.classList.add('hidden');

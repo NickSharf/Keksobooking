@@ -246,19 +246,26 @@ textarea:focus
 
 .map__pin img
 {
-    padding: 3px;
-
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
     border-radius: 50%;
     background-color: #fff;
 }
 
-.map__pin::after
+.map__pin:not(.map__pin--main) img
+{
+    top: 3px;
+}
+
+.map__pin--main::after
 {
     position: absolute;
-    top: 98%;
+    top: 100%;
     left: 50%;
-
-    transform: translateX(-50%);
 
     width: 0;
     height: 0;
@@ -268,6 +275,26 @@ textarea:focus
     border: solid 5px transparent;
     border-top: solid 18px #fff;
     border-bottom: 0;
+}
+
+.map__pin:not(.map__pin--main)::after
+{
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 70px;
+    top: -2.5px;
+    left: -2.5px;
+    background-image: url("../img/pins.svg");
+    background-repeat: no-repeat;
+    background-position: 0 -9px;
+}
+
+.map__pin:not(.map__pin--main):hover::after,
+.map__pin:not(.map__pin--main):active::after,
+.map__pin--active:not(.map__pin--main)::after
+{
+    background-position: 0 -88px;
 }
 
 .map__pin:active,
@@ -447,6 +474,27 @@ textarea:focus
 .popup h4
 {
     margin-bottom: .3em;
+}
+
+.popup__pictures
+{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.popup__pictures img
+{
+  width: 46px;
+  height: 46px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border: 1px solid black;
+}
+
+.popup__pictures img:nth-of-type(4)
+{
+  margin-right: 0;
 }
 
 .popup__pictures li
