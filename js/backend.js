@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var SERVER_URL = 'https://js.dump.academy/keksobooking';
+  var SERVER_URL = 'https://javascript.pages.academy/keksobooking';
 
   var setup = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
